@@ -24,7 +24,6 @@ function FolderContent({ folders, links, onFolderClick }) {
                   "폴더 없음";
 
         setSelectedFolderName(folderName);
-        onFolderClick(folderId);
     };
 
     const renderFolderButtons = () =>
