@@ -4,11 +4,11 @@ import "../styles/SearchBar.css";
 function SearchBar({ setSearchTerm }) {
     const [inputValue, setInputValue] = useState("");
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: React.ChangeEvent) => {
         setInputValue(event.target.value);
     };
 
-    const handleSearchSubmit = (event) => {
+    const handleSearchSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         setSearchTerm(inputValue);
     };

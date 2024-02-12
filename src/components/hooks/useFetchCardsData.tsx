@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { calculateTimePassed, formatDate } from "../utils";
+import { CardDataProps } from "../Cardlist";
 
 export function useFetchCardsData() {
-    const [cardsData, setCardsData] = useState([]);
+    const [cardsData, setCardsData] = useState<CardDataProps[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {

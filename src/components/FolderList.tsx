@@ -3,13 +3,7 @@ import { useFetchFolders } from "./hooks/useFetchFolders";
 import { fetchFolders } from "./api/fetchFolders";
 import FolderContent from "./FolderContent";
 import "../styles/FolderList.css";
-
-interface Link {
-    id: string;
-    title: string;
-    description: string;
-    url: string;
-}
+import { Link } from "../interfaces/models";
 
 interface FolderListProps {
     searchTerm: string;

@@ -5,20 +5,7 @@ import LinkCard from "./LinkCard";
 import { calculateTimePassed, formatDate } from "./utils";
 import useModal from "./hooks/useModal";
 import Modal from "./Modal";
-
-interface Folder {
-    id: string;
-    name: string;
-}
-
-interface Link {
-    id: string;
-    url: string;
-    title: string;
-    description: string;
-    imageSource?: string;
-    created_at: string;
-}
+import { Folder, Link } from "../interfaces/models";
 
 interface FolderContentProps {
     folders: Folder[];

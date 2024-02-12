@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Cardlist.css";
 import { useFetchCardsData } from "./hooks/useFetchCardsData";
 
-interface CardDataProps {
+export interface CardDataProps {
     id: number;
     url: string;
     title: string;

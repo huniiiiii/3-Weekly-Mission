@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import "../styles/LinkCard.css";
 import KebabMenu from "./KebabMenu";
-
-interface Link {
-    id: string;
-    url: string;
-    title: string;
-    description: string;
-    imageSource?: string;
-    created_at: string;
-}
+import { Link } from "../interfaces/models";
 
 interface LinkCardProps {
     link: Link;
-    setModalState: React.Dispatch<React.SetStateAction<any>>;
+    setModalState: React.Dispatch<React.SetStateAction<Boolean>>;
     calculateTimePassed: (date: string) => string;
     formatDate: (date: string) => string;
 }
