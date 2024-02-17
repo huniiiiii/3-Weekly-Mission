@@ -1,6 +1,6 @@
 import "../styles/Modal.css";
 import { useState } from "react";
-import KakaoShareButton from "./api/KakaoShareButton";
+import KakaoShareButton from "../api/KakaoShareButton";
 
 interface ModalProps {
     values: {

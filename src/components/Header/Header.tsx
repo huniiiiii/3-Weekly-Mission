@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Profile from "./profile";
+import Profile from "../profile";
 import "../styles/Header.css";
 
 function Header() {

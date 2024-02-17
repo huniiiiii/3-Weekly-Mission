@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import FolderHeader from "../components/FolderHeader";
-import LinkForm from "../components/LinkForm";
-import SearchBar from "../components/SearchBar";
-import FolderList from "../components/FolderList";
-import Footer from "../components/Footer";
-import FloatingActionButton from "../components/FloatingActionButton";
+import FolderHeader from "../../src/components/FolderHeader/FolderHeader";
+import LinkForm from "../../src/components/LinkForm/LinkForm";
+import SearchBar from "../../src/components/SearchBar/SearchBar";
+import FolderList from "../../src/components/FolderList/FolderList";
+import Footer from "../../src/components/Footer/Footer";
+import FloatingActionButton from "../../src/components/FloatingActionButton/FloatingActionButton";
 
 function Folder() {
     const [searchTerm, setSearchTerm] = useState("");

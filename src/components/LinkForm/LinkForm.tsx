@@ -1,7 +1,7 @@
-import Modal from "./Modal";
+import Modal from "../Modal/Modal";
 import React from "react";
 import "../styles/LinkForm.css";
-import useModal from "./hooks/useModal";
+import useModal from "../hooks/useModal";
 
 function LinkForm() {
     const [modalState, setModalState, onHandleCancel] = useModal();

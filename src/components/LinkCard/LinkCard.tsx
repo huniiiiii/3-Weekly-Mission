@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/LinkCard.css";
-import KebabMenu from "./KebabMenu";
-import { Link } from "../interfaces/models";
+import KebabMenu from "../KebabMenu/KebabMenu";
+import { Link } from "../../interfaces/models";
 
 interface LinkCardProps {
     link: Link;

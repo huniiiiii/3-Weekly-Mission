@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useFetchFolders } from "./hooks/useFetchFolders";
-import { fetchFolders } from "./api/fetchFolders";
-import FolderContent from "./FolderContent";
+import { useFetchFolders } from "../hooks/useFetchFolders";
+import { fetchFolders } from "../api/fetchFolders";
+import FolderContent from "../FolderContent/FolderContent";
 import "../styles/FolderList.css";
-import { Link } from "../interfaces/models";
+import { Link } from "../../interfaces/models";
 
 interface FolderListProps {
     searchTerm: string;

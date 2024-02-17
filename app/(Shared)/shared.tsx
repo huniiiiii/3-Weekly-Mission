@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import Cardlist from "../components/Cardlist";
-import SearchBar from "../components/SearchBar";
-import Footer from "../components/Footer";
+import Header from "../../src/components/Header/Header";
+import Nav from "../../src/components/Nav/Nav";
+import Cardlist from "../../src/components/Cardlist/Cardlist";
+import SearchBar from "../../src/components/SearchBar/SearchBar";
+import Footer from "../../src/components/Footer/Footer";
 
 function Shared() {
     const [searchTerm, setSearchTerm] = useState("");

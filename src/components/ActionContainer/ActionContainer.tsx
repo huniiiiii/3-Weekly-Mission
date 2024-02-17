@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/ActionContainer.css";
-import Modal from "./Modal";
-import useModal from "./hooks/useModal";
+import Modal from "../Modal/Modal";
+import useModal from "../hooks/useModal";
 
 function ActionContainer({ folderName }) {
     const [modalState, setModalState, onHandleCancel] = useModal();

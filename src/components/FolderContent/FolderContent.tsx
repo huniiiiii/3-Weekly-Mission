@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../styles/FolderContent.css";
-import ActionContainer from "./ActionContainer";
-import LinkCard from "./LinkCard";
-import { calculateTimePassed, formatDate } from "./utils";
-import useModal from "./hooks/useModal";
-import Modal from "./Modal";
-import { Folder, Link } from "../interfaces/models";
+import ActionContainer from "../ActionContainer/ActionContainer";
+import LinkCard from "../LinkCard/LinkCard";
+import { calculateTimePassed, formatDate } from "../utils";
+import useModal from "../hooks/useModal";
+import Modal from "../Modal/Modal";
+import { Folder, Link } from "../../interfaces/models";
 
 interface FolderContentProps {
     folders: Folder[];

@@ -1,5 +1,5 @@
 import React from "react";
-import FolderProfile from "./FolderProfile";
+import FolderProfile from "../FolderProfile";
 import "../styles/FolderHeader.css";
 
 function FolderHeader() {
