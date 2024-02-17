@@ -1,0 +1,20 @@
+.search-results-message {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-left: 410px;
+    margin-bottom: 40px;
+    width: 381px;
+    height: 38px;
+    color: #9fa6b2;
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.2px;
+}
+
+.search-results-text {
+    color: #373740;
+}
