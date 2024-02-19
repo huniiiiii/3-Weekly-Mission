@@ -55,7 +55,9 @@ function Input({ type, onValidate }: InputProps) {
                 )}
             </div>
             {value && isError && (
-                <p className="error-message">내용을 다시 작성해 주세요</p>
+                <p className="error-message">
+                    글자수를 8자 이상으로 사용해주세요.
+                </p>
             )}
         </div>
     );

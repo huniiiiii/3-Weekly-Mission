@@ -4,7 +4,7 @@ import Input from "./Input";
 
 function LoginForm() {
     const validatePassword = (value: string) => {
-        return value.length < 8;
+        return value.length < 7;
     };
 
     const validateId = (value: string) => {
