@@ -1,0 +1,54 @@
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card-text-container {
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.favorite-icon,
+.kebab-menu-icon {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.favorite-icon {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 34px;
+}
+
+.favorite-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.kebab-menu-icon {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 17px;
+}
+
+.kebab-menu-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.link-card {
+    cursor: pointer;
+}

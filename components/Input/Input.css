@@ -1,0 +1,47 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+
+  width: 350px;
+  padding: 18px 15px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Linkbrary-gray20, #ccd5e3);
+  background: var(--Linkbrary-white, #fff);
+}
+
+.input-field {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.input-container:focus-within {
+  border-color: #6d6afe;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: var(--Linkbrary-red, #ff5b56);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input-container.error {
+  border-color: #ff5b56;
+}
