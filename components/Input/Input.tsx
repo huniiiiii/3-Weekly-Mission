@@ -1,66 +1,62 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import "@/components/Input/Input.css";
 
 interface InputProps {
     type: "text" | "password";
-    onValidate?: (value: string) => boolean;
+    placeholder?: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    value?: string;
+    name?: string;
 }
 
-function Input({ type, onValidate }: InputProps) {
-    const [inputType, setInputType] = useState<string>(type);
-    const [value, setValue] = useState<string>("");
-    const [isError, setIsError] = useState<boolean>(false);
+const Input = forwardRef<HTMLInputElement, InputProps>(
+    ({ type, placeholder, onChange, onBlur, value, name, error }, ref) => {
+        const [inputType, setInputType] = useState<string>(type);
+        const inputContainerClassName = `input-container ${
+            error ? "error" : ""
+        }`;
 
-    const toggleVisibility = () => {
-        setInputType((prevType) =>
-            prevType === "password" ? "text" : "password"
-        );
-    };
+        const toggleVisibility = () => {
+            setInputType((prevType) =>
+                prevType === "password" ? "text" : "password"
+            );
+        };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        setValue(newValue);
+        return (
+            <div className="input-wrapper">
+                <div className={inputContainerClassName}>
+                    <input
+                        ref={ref}
+                        type={inputType}
+                        name={name}
+                        placeholder={placeholder}
+                        value={value || ""}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="input-field"
+                    />
 
-        if (!newValue) {
-            setIsError(false);
-        } else {
-            const error = onValidate ? onValidate(newValue) : false;
-            setIsError(error);
-        }
-    };
-
-    return (
-        <div className="input-wrapper">
-            <div className={`input-container ${isError ? "error" : ""}`}>
-                <input
-                    type={inputType}
-                    placeholder="내용 입력"
-                    value={value}
-                    onChange={handleChange}
-                    className="input-field"
-                />
-                {type === "password" && (
-                    <div onClick={toggleVisibility} className="password-toggle">
-                        <img
-                            src={
-                                inputType === "password"
-                                    ? "/images/eye-off.svg"
-                                    : "/images/eye-on.svg"
-                            }
-                            alt="Toggle Password Visibility"
-                        />
-                    </div>
-                )}
+                    {type === "password" && (
+                        <div
+                            onClick={toggleVisibility}
+                            className="password-toggle"
+                        >
+                            <img
+                                src={
+                                    inputType === "password"
+                                        ? "/images/eye-off.svg"
+                                        : "/images/eye-on.svg"
+                                }
+                                alt="Toggle Password Visibility"
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
-            {value && isError && (
-                <p className="error-message">
-                    글자수를 8자 이상으로 사용해주세요.
-                </p>
-            )}
-        </div>
-    );
-}
+        );
+    }
+);
 
 export default Input;
