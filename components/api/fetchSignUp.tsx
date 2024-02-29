@@ -1,16 +1,16 @@
-async function fetchsignup(email, password) {
+import axios from "axios";
+
+async function fetchSignup(email, password) {
     try {
-        const response = await fetch(
+        const response = await axios.post(
             "https://bootcamp-api.codeit.kr/api/sign-up",
             {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
+                email,
+                password,
             }
         );
-        const data = await response.json();
+
+        const data = response.data;
 
         if (response.status === 200) {
             return {
@@ -27,9 +27,11 @@ async function fetchsignup(email, password) {
     } catch (error) {
         return {
             success: false,
-            message: "회원가입 요청 중 네트워크 오류가 발생했습니다.",
+            message: error.response
+                ? error.response.data.message
+                : "회원가입 요청 중 네트워크 오류가 발생했습니다.",
         };
     }
 }
 
-export default fetchsignup;
+export default fetchSignup;

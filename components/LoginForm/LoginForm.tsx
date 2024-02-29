@@ -5,6 +5,16 @@ import { useRouter } from "next/navigation";
 import styles from "./LoginForm.module.css";
 import Input from "../Input/Input";
 import fetchlogin from "../api/fetchLogin";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+    email: yup
+        .string()
+        .required("이메일을 입력해 주세요.")
+        .email("올바른 이메일 주소가 아닙니다."),
+    password: yup.string().required("비밀번호를 입력해 주세요."),
+});
 
 function LoginForm() {
     const router = useRouter();
@@ -14,7 +24,10 @@ function LoginForm() {
         handleSubmit,
         formState: { errors },
         setError,
-    } = useForm({ mode: "onBlur" });
+    } = useForm({
+        mode: "onBlur",
+        resolver: yupResolver(schema), // yupResolver 사용
+    });
 
     const onSubmit = async (data) => {
         const response = await fetchlogin(data.email, data.password);
@@ -35,18 +48,11 @@ function LoginForm() {
     };
 
     return (
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-            <h3>이메일</h3>
+        <form className={styles.loginform} onSubmit={handleSubmit(onSubmit)}>
+            <h4>이메일</h4>
             <Controller
                 name="email"
                 control={control}
-                rules={{
-                    required: "이메일을 입력해 주세요.",
-                    pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                        message: "올바른 이메일 주소가 아닙니다.",
-                    },
-                }}
                 render={({ field }) => (
                     <Input
                         {...field}
@@ -60,11 +66,10 @@ function LoginForm() {
                 <p className={styles.errormessage}>{errors.email.message}</p>
             )}
 
-            <h3>비밀번호</h3>
+            <h4>비밀번호</h4>
             <Controller
                 name="password"
                 control={control}
-                rules={{ required: "비밀번호를 입력해 주세요." }}
                 render={({ field }) => (
                     <Input
                         {...field}

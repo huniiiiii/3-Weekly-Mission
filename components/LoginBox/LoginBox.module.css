@@ -41,38 +41,3 @@
     line-height: normal;
     margin-top: 35px;
 }
-
-.sosialwapper {
-    display: flex;
-    width: 351px;
-    padding: 12px 24px;
-    margin-top: 32px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px;
-    border: 1px solid var(--Linkbrary-gray20, #ccd5e3);
-    background: var(--Linkbrary-gray10, #e7effb);
-}
-
-.sosialbox {
-    display: flex;
-    gap: 172px;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.sosialiconbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
-
-.sosialtext {
-    color: var(--Linkbrary-gray100, #373740);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}

@@ -13,7 +13,7 @@ interface InputProps {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
     ({ type, placeholder, onChange, onBlur, value, name, error }, ref) => {
-        const [inputType, setInputType] = useState<string>(type);
+        const [inputType, setInputType] = useState<"text" | "password">(type);
         const inputContainerClassName = `input-container ${
             error ? "error" : ""
         }`;

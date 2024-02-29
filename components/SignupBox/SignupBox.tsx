@@ -2,11 +2,34 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import Input from "../Input/Input";
 import Link from "next/link";
 import styles from "./SignupBox.module.css";
 import fetchcheckemail from "../api/fetchCheckEmail";
 import fetchsignup from "../api/fetchSignUp";
+import SocialBox from "../SocialBox/SocialBox";
+
+const signupSchema = yup
+    .object({
+        email: yup
+            .string()
+            .required("이메일을 입력해 주세요.")
+            .email("올바른 이메일 주소가 아닙니다."),
+        password: yup
+            .string()
+            .required("비밀번호를 입력해 주세요.")
+            .min(8, "비밀번호는 8자 이상이어야 합니다.")
+            .matches(
+                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                "비밀번호는 영문, 숫자 조합이어야 합니다."
+            ),
+        confirmPassword: yup
+            .string()
+            .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않아요."),
+    })
+    .required();
 
 function SignupBox() {
     const router = useRouter();
@@ -17,7 +40,10 @@ function SignupBox() {
         formState: { errors },
         setError,
         clearErrors,
-    } = useForm({ mode: "onBlur" });
+    } = useForm({
+        mode: "onBlur",
+        resolver: yupResolver(signupSchema),
+    });
 
     const onSubmit = async (data) => {
         if (data.password !== data.confirmPassword) {
@@ -49,57 +75,44 @@ function SignupBox() {
                 <div className={styles.headertext}>
                     이미 회원이신가요?{" "}
                     <Link href="/signin">
-                        <span className={styles.signupLink}>로그인 하기</span>
+                        <span
+                            className={styles.signuplink}
+                            style={{ cursor: "pointer" }}
+                        >
+                            로그인 하기
+                        </span>
                     </Link>
                 </div>
             </div>
             <form
-                className={styles.signupForm}
+                className={styles.signupform}
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <Controller
                     name="email"
                     control={control}
-                    rules={{
-                        required: "이메일을 입력해 주세요.",
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "올바른 이메일 주소가 아닙니다.",
-                        },
-                    }}
                     render={({ field }) => (
                         <Input
                             {...field}
                             type="text"
                             placeholder="이메일을 입력해 주세요."
                             onBlur={async (e) => {
-                                field.onBlur(e);
-                                const emailValue = e.target.value;
-
-                                if (
-                                    emailValue &&
-                                    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                                        emailValue
-                                    )
-                                ) {
-                                    const result = await fetchcheckemail(
-                                        emailValue
-                                    );
-                                    if (!result.available) {
-                                        setError("email", {
-                                            type: "manual",
-                                            message: result.message,
-                                        });
-                                    } else {
-                                        clearErrors("email");
-                                    }
+                                const result = await fetchcheckemail(
+                                    e.target.value
+                                );
+                                if (!result.available) {
+                                    setError("email", {
+                                        type: "manual",
+                                        message: result.message,
+                                    });
+                                } else {
+                                    clearErrors("email");
                                 }
                             }}
                             error={errors.email && errors.email.message}
                         />
                     )}
                 />
-
                 {errors.email && (
                     <p className={styles.errormessage}>
                         {errors.email.message}
@@ -109,17 +122,6 @@ function SignupBox() {
                 <Controller
                     name="password"
                     control={control}
-                    rules={{
-                        required: "비밀번호를 입력해 주세요.",
-                        minLength: {
-                            value: 8,
-                            message: "비밀번호는 8자 이상이어야 합니다.",
-                        },
-                        pattern: {
-                            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                            message: "비밀번호는 영문, 숫자 조합이어야 합니다.",
-                        },
-                    }}
                     render={({ field }) => (
                         <Input
                             {...field}
@@ -138,11 +140,6 @@ function SignupBox() {
                 <Controller
                     name="confirmPassword"
                     control={control}
-                    rules={{
-                        validate: (value) =>
-                            value === watch("password") ||
-                            "비밀번호가 일치하지 않아요.",
-                    }}
                     render={({ field }) => (
                         <Input
                             {...field}
@@ -164,29 +161,14 @@ function SignupBox() {
                 <button className={styles.signupbutton} type="submit">
                     회원가입
                 </button>
+                {errors.signupError && (
+                    <p className={styles.errormessage}>
+                        {errors.signupError.message}
+                    </p>
+                )}
             </form>
 
-            <div className={styles.sosialwapper}>
-                <div className={styles.sosialbox}>
-                    <div className={styles.sosialtext}>소셜 로그인</div>
-                    <div className={styles.sosialiconbox}>
-                        <Link
-                            href="https://www.google.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img src="/images/google.svg" alt="Google" />
-                        </Link>
-                        <Link
-                            href="https://www.kakaocorp.com/page"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img src="/images/kakao.svg" alt="kakao" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <SocialBox />
         </div>
     );
 }
